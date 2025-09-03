@@ -1,0 +1,1351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://queryinvoiceservice.entegrator.com/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="QueryDocumentWSService" targetNamespace="http://queryinvoiceservice.entegrator.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="CustomBinding_QueryDocumentWS_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://queryinvoiceservice.entegrator.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://invoiceloadingservice.entegrator.com/" />
+      <xs:element name="QueryArchivedInboxDocument">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="paramType" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="parameter" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="withXML" type="xs:string" />
+            <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="fiscalYear" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryArchivedInboxDocumentResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q1="http://invoiceloadingservice.entegrator.com/" minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="q1:DocumentQueryResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryInboxDocumentsWithGUIDList">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="guidList" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="documentType" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryInboxDocumentsWithGUIDListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q2="http://invoiceloadingservice.entegrator.com/" minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="q2:DocumentQueryResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryInboxDocumentsWithReceivedDate">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="startDate" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="endDate" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="documentType" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="queried" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="withXML" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="takenFromEntegrator" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="minRecordId" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryInboxDocumentsWithReceivedDateResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q3="http://invoiceloadingservice.entegrator.com/" minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="q3:DocumentQueryResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryInboxDocument">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="paramType" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="parameter" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="withXML" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryInboxDocumentResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q4="http://invoiceloadingservice.entegrator.com/" minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="q4:DocumentQueryResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryInboxDocumentsWithReceivedDateWithSearchParams">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="startDate" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="endDate" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="documentType" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="queried" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="withXML" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="takenFromEntegrator" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="minRecordId" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="searchParams" type="tns:ArrayOfQueryInboxDocumentsWithReceivedDateWithSearchParamsEntry" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="ArrayOfQueryInboxDocumentsWithReceivedDateWithSearchParamsEntry">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="entry">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="key" type="xs:string" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="value" type="xs:string" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="QueryInboxDocumentsWithReceivedDateWithSearchParamsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q5="http://invoiceloadingservice.entegrator.com/" minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="q5:DocumentQueryResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryInboxDocumentsWithDocumentDate">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="startDate" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="endDate" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="documentType" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="queried" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="withXML" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="takenFromEntegrator" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="minRecordId" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryInboxDocumentsWithDocumentDateResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q6="http://invoiceloadingservice.entegrator.com/" minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="q6:DocumentQueryResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryInboxDocumentsWithDocumentDateAndSearchParams">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="startDate" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="endDate" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="documentType" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="queried" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="withXML" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="takenFromEntegrator" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="minRecordId" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="searchParams" type="tns:ArrayOfQueryInboxDocumentsWithDocumentDateAndSearchParamsEntry" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="ArrayOfQueryInboxDocumentsWithDocumentDateAndSearchParamsEntry">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="entry">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="key" type="xs:string" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="value" type="xs:string" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="QueryInboxDocumentsWithDocumentDateAndSearchParamsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q7="http://invoiceloadingservice.entegrator.com/" minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="q7:DocumentQueryResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryInboxArchivedDocumentsWithDocumentDate">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="startDate" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="endDate" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="documentType" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="queried" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="withXML" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="takenFromEntegrator" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="minRecordId" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryInboxArchivedDocumentsWithDocumentDateResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q8="http://invoiceloadingservice.entegrator.com/" minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="q8:DocumentQueryResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryOutboxDocument">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="paramType" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="parameter" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="withXML" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryOutboxDocumentResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q9="http://invoiceloadingservice.entegrator.com/" minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="q9:DocumentQueryResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryArchivedOutboxDocument">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="paramType" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="parameter" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="withXML" type="xs:string" />
+            <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="fiscalYear" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryArchivedOutboxDocumentResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q10="http://invoiceloadingservice.entegrator.com/" minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="q10:DocumentQueryResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryOutboxDocumentWithLocalId">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="localId" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryOutboxDocumentWithLocalIdResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q11="http://invoiceloadingservice.entegrator.com/" minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="q11:DocumentQueryResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryOutboxDocumentsWithReceivedDate">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="startDate" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="endDate" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="documentType" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="queried" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="withXML" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="minRecordId" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryOutboxDocumentsWithReceivedDateResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q12="http://invoiceloadingservice.entegrator.com/" minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="q12:DocumentQueryResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryOutboxDocumentsWithReceivedDateWithSearchParams">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="startDate" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="endDate" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="documentType" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="queried" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="withXML" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="minRecordId" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="searchParams" type="tns:ArrayOfQueryOutboxDocumentsWithReceivedDateWithSearchParamsEntry" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="ArrayOfQueryOutboxDocumentsWithReceivedDateWithSearchParamsEntry">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="entry">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="key" type="xs:string" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="value" type="xs:string" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="QueryOutboxDocumentsWithReceivedDateWithSearchParamsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q13="http://invoiceloadingservice.entegrator.com/" minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="q13:DocumentQueryResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryOutboxDocumentsWithDocumentDate">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="startDate" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="endDate" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="documentType" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="queried" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="withXML" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="minRecordId" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryOutboxDocumentsWithDocumentDateResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q14="http://invoiceloadingservice.entegrator.com/" minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="q14:DocumentQueryResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryOutboxDocumentsWithDocumentDateAndSearchParams">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="startDate" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="endDate" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="documentType" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="queried" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="withXML" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="minRecordId" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="searchParams" type="tns:ArrayOfQueryOutboxDocumentsWithDocumentDateAndSearchParamsEntry" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="ArrayOfQueryOutboxDocumentsWithDocumentDateAndSearchParamsEntry">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="entry">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="key" type="xs:string" />
+                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="value" type="xs:string" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="QueryOutboxDocumentsWithDocumentDateAndSearchParamsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q15="http://invoiceloadingservice.entegrator.com/" minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="q15:DocumentQueryResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryOutboxArchivedDocumentsWithDocumentDate">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="startDate" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="endDate" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="documentType" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="queried" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="withXML" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="minRecordId" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryOutboxArchivedDocumentsWithDocumentDateResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q16="http://invoiceloadingservice.entegrator.com/" minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="q16:DocumentQueryResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryOutboxDocumentsWithWithGUIDList">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="guidList" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="documentType" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryOutboxDocumentsWithWithGUIDListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q17="http://invoiceloadingservice.entegrator.com/" minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="q17:DocumentQueryResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryAppResponseOfOutboxDocument">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="document_UUID" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="withXML" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryAppResponseOfOutboxDocumentResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q18="http://invoiceloadingservice.entegrator.com/" minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="q18:DocumentQueryResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryAppResponseOfInboxDocument">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="document_UUID" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="withXML" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryAppResponseOfInboxDocumentResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q19="http://invoiceloadingservice.entegrator.com/" minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="q19:DocumentQueryResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetLastInvoiceIdAndDate">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="source_id" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="documentIdPrefix" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetLastInvoiceIdAndDateResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q20="http://invoiceloadingservice.entegrator.com/" minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="q20:DocumentQueryResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryUsers">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="startdate" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="finishDate" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="vkn_tckn" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryUsersResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="tns:UserQueryResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="UserQueryResponse">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="queryState" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="stateExplanation" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="userCount" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="users" type="tns:ResponseUser" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ResponseUser">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="vkn_tckn" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="unvan_ad" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="etiket" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="tip" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="ilkKayitZamani" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="etiketKayitZamani" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="etiketKayitTuru" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="QueryUsersByTitle">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="title" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryUsersByTitleResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="tns:UserQueryResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetUserPKListInfo">
+        <xs:complexType />
+      </xs:element>
+      <xs:element name="GetUserPKListInfoResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="tns:UserListInfo" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="UserListInfo">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="size" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="maxFirstCreationTime" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="maxAliasCreationTime" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="code" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="explanation" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="GetUserPKList">
+        <xs:complexType />
+      </xs:element>
+      <xs:element name="GetUserPKListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="tns:UserListDocument" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="UserListDocument">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="code" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="explanation" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="fileName" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="fileContent" type="xs:base64Binary" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="GetUserGBList">
+        <xs:complexType />
+      </xs:element>
+      <xs:element name="GetUserGBListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="tns:UserListDocument" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetNewUserPKList">
+        <xs:complexType />
+      </xs:element>
+      <xs:element name="GetNewUserPKListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="tns:UserListDocument" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetNewUserGBList">
+        <xs:complexType />
+      </xs:element>
+      <xs:element name="GetNewUserGBListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="tns:UserListDocument" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryEnvelope">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="envelopeUUID" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryEnvelopeResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q21="http://invoiceloadingservice.entegrator.com/" minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="q21:DocumentQueryResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SetTakenFromEntegrator">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="documentUuid" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SetTakenFromEntegratorResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q22="http://invoiceloadingservice.entegrator.com/" minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="q22:DocumentQueryResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryOutboxResponseDocument">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="documentUuid" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="QueryOutboxResponseDocumentResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q23="http://invoiceloadingservice.entegrator.com/" minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="q23:DocumentQueryResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetPKList">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="vknTckn" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetPKListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="tns:UserQueryResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetInboxAttachment">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="documentUUID" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="fileName" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetInboxAttachmentResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="return" type="tns:AttachmentResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="AttachmentResponse">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="queryState" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="stateExplanation" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="filename" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="attachmentContent" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:tns="http://invoiceloadingservice.entegrator.com/" elementFormDefault="qualified" targetNamespace="http://invoiceloadingservice.entegrator.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="DocumentQueryResponse">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="queryState" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="stateExplanation" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="documentsCount" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="maxRecordIdinList" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="documents" type="tns:ResponseDocument" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ResponseDocument">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="document_uuid" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="document_id" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="envelope_uuid" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="document_profile" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="system_creation_time" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="document_issue_date" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="source_id" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="destination_id" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="source_urn" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="source_title" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="destination_urn" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="currency_code" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="invoice_total" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="state_code" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="state_explanation" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="cause" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="content_type" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="document_content" type="xs:base64Binary" />
+          <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="emailSent" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="emailSentDate" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="cancelled" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="cancel_date" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="reference_document_uuid" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="response_document_uuid" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="response_code" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="response_validation_state" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="response_received_date" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="gtb_reference_no" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="gtb_gcb_tescil_no" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="gtb_fiili_ihracat_tarihi" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="reserved1" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="reserved2" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="reserved3" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="document_type_code" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="notes" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="despatchInfo" type="tns:DocumentInfo" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="orderInfo" type="tns:DocumentInfo" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="taxInfo" type="tns:TaxInfo" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="taxInclusiveAmount" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="taxExlusiveAmount" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="allowanceTotalAmount" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="taxAmount0015" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="lineExtensionAmount" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="suplierPersonName" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="supplierPersonMiddleName" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="supplierPersonFamilyName" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="customerPersonName" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="customerPersonMiddleName" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="customerPersonFamilyName" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="destination_title" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="is_read" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="is_archieved" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="is_accounted" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="is_transferred" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="is_printed" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="local_id" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="sendingType" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="buyerCustomerPartyName" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="buyerCustomerPersonName" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="buyerCustomerPersonFamilyName" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="report_no" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="cancel_report_no" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="objected" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="objectionReason" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="objectionDate" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="objectionReportNo" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="objectionType" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="objectionDocumentNo" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="destinationEmail" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="destinationMobile" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="smsSentDate" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="cancelPortalStatus" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="cancelReason" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="DocumentInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="documentDate" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="documentNo" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TaxInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="taxtTypeCode" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="taxtTypeName" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="taxAmount" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="taxPercentage" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="QueryArchivedInboxDocumentRequest">
+    <wsdl:part name="parameters" element="tns:QueryArchivedInboxDocument" />
+  </wsdl:message>
+  <wsdl:message name="QueryArchivedInboxDocumentResponse">
+    <wsdl:part name="parameters" element="tns:QueryArchivedInboxDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryInboxDocumentsWithGUIDListRequest">
+    <wsdl:part name="parameters" element="tns:QueryInboxDocumentsWithGUIDList" />
+  </wsdl:message>
+  <wsdl:message name="QueryInboxDocumentsWithGUIDListResponse">
+    <wsdl:part name="parameters" element="tns:QueryInboxDocumentsWithGUIDListResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryInboxDocumentsWithReceivedDateRequest">
+    <wsdl:part name="parameters" element="tns:QueryInboxDocumentsWithReceivedDate" />
+  </wsdl:message>
+  <wsdl:message name="QueryInboxDocumentsWithReceivedDateResponse">
+    <wsdl:part name="parameters" element="tns:QueryInboxDocumentsWithReceivedDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryInboxDocumentRequest">
+    <wsdl:part name="parameters" element="tns:QueryInboxDocument" />
+  </wsdl:message>
+  <wsdl:message name="QueryInboxDocumentResponse">
+    <wsdl:part name="parameters" element="tns:QueryInboxDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryInboxDocumentsWithReceivedDateWithSearchParamsRequest">
+    <wsdl:part name="parameters" element="tns:QueryInboxDocumentsWithReceivedDateWithSearchParams" />
+  </wsdl:message>
+  <wsdl:message name="QueryInboxDocumentsWithReceivedDateWithSearchParamsResponse">
+    <wsdl:part name="parameters" element="tns:QueryInboxDocumentsWithReceivedDateWithSearchParamsResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryInboxDocumentsWithDocumentDateRequest">
+    <wsdl:part name="parameters" element="tns:QueryInboxDocumentsWithDocumentDate" />
+  </wsdl:message>
+  <wsdl:message name="QueryInboxDocumentsWithDocumentDateResponse">
+    <wsdl:part name="parameters" element="tns:QueryInboxDocumentsWithDocumentDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryInboxDocumentsWithDocumentDateAndSearchParamsRequest">
+    <wsdl:part name="parameters" element="tns:QueryInboxDocumentsWithDocumentDateAndSearchParams" />
+  </wsdl:message>
+  <wsdl:message name="QueryInboxDocumentsWithDocumentDateAndSearchParamsResponse">
+    <wsdl:part name="parameters" element="tns:QueryInboxDocumentsWithDocumentDateAndSearchParamsResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryInboxArchivedDocumentsWithDocumentDateRequest">
+    <wsdl:part name="parameters" element="tns:QueryInboxArchivedDocumentsWithDocumentDate" />
+  </wsdl:message>
+  <wsdl:message name="QueryInboxArchivedDocumentsWithDocumentDateResponse">
+    <wsdl:part name="parameters" element="tns:QueryInboxArchivedDocumentsWithDocumentDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryOutboxDocumentRequest">
+    <wsdl:part name="parameters" element="tns:QueryOutboxDocument" />
+  </wsdl:message>
+  <wsdl:message name="QueryOutboxDocumentResponse">
+    <wsdl:part name="parameters" element="tns:QueryOutboxDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryArchivedOutboxDocumentRequest">
+    <wsdl:part name="parameters" element="tns:QueryArchivedOutboxDocument" />
+  </wsdl:message>
+  <wsdl:message name="QueryArchivedOutboxDocumentResponse">
+    <wsdl:part name="parameters" element="tns:QueryArchivedOutboxDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryOutboxDocumentWithLocalIdRequest">
+    <wsdl:part name="parameters" element="tns:QueryOutboxDocumentWithLocalId" />
+  </wsdl:message>
+  <wsdl:message name="QueryOutboxDocumentWithLocalIdResponse">
+    <wsdl:part name="parameters" element="tns:QueryOutboxDocumentWithLocalIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryOutboxDocumentsWithReceivedDateRequest">
+    <wsdl:part name="parameters" element="tns:QueryOutboxDocumentsWithReceivedDate" />
+  </wsdl:message>
+  <wsdl:message name="QueryOutboxDocumentsWithReceivedDateResponse">
+    <wsdl:part name="parameters" element="tns:QueryOutboxDocumentsWithReceivedDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryOutboxDocumentsWithReceivedDateWithSearchParamsRequest">
+    <wsdl:part name="parameters" element="tns:QueryOutboxDocumentsWithReceivedDateWithSearchParams" />
+  </wsdl:message>
+  <wsdl:message name="QueryOutboxDocumentsWithReceivedDateWithSearchParamsResponse">
+    <wsdl:part name="parameters" element="tns:QueryOutboxDocumentsWithReceivedDateWithSearchParamsResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryOutboxDocumentsWithDocumentDateRequest">
+    <wsdl:part name="parameters" element="tns:QueryOutboxDocumentsWithDocumentDate" />
+  </wsdl:message>
+  <wsdl:message name="QueryOutboxDocumentsWithDocumentDateResponse">
+    <wsdl:part name="parameters" element="tns:QueryOutboxDocumentsWithDocumentDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryOutboxDocumentsWithDocumentDateAndSearchParamsRequest">
+    <wsdl:part name="parameters" element="tns:QueryOutboxDocumentsWithDocumentDateAndSearchParams" />
+  </wsdl:message>
+  <wsdl:message name="QueryOutboxDocumentsWithDocumentDateAndSearchParamsResponse">
+    <wsdl:part name="parameters" element="tns:QueryOutboxDocumentsWithDocumentDateAndSearchParamsResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryOutboxArchivedDocumentsWithDocumentDateRequest">
+    <wsdl:part name="parameters" element="tns:QueryOutboxArchivedDocumentsWithDocumentDate" />
+  </wsdl:message>
+  <wsdl:message name="QueryOutboxArchivedDocumentsWithDocumentDateResponse">
+    <wsdl:part name="parameters" element="tns:QueryOutboxArchivedDocumentsWithDocumentDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryOutboxDocumentsWithWithGUIDListRequest">
+    <wsdl:part name="parameters" element="tns:QueryOutboxDocumentsWithWithGUIDList" />
+  </wsdl:message>
+  <wsdl:message name="QueryOutboxDocumentsWithWithGUIDListResponse">
+    <wsdl:part name="parameters" element="tns:QueryOutboxDocumentsWithWithGUIDListResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryAppResponseOfOutboxDocumentRequest">
+    <wsdl:part name="parameters" element="tns:QueryAppResponseOfOutboxDocument" />
+  </wsdl:message>
+  <wsdl:message name="QueryAppResponseOfOutboxDocumentResponse">
+    <wsdl:part name="parameters" element="tns:QueryAppResponseOfOutboxDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryAppResponseOfInboxDocumentRequest">
+    <wsdl:part name="parameters" element="tns:QueryAppResponseOfInboxDocument" />
+  </wsdl:message>
+  <wsdl:message name="QueryAppResponseOfInboxDocumentResponse">
+    <wsdl:part name="parameters" element="tns:QueryAppResponseOfInboxDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLastInvoiceIdAndDateRequest">
+    <wsdl:part name="parameters" element="tns:GetLastInvoiceIdAndDate" />
+  </wsdl:message>
+  <wsdl:message name="GetLastInvoiceIdAndDateResponse">
+    <wsdl:part name="parameters" element="tns:GetLastInvoiceIdAndDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryUsersRequest">
+    <wsdl:part name="parameters" element="tns:QueryUsers" />
+  </wsdl:message>
+  <wsdl:message name="QueryUsersResponse">
+    <wsdl:part name="parameters" element="tns:QueryUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryUsersByTitleRequest">
+    <wsdl:part name="parameters" element="tns:QueryUsersByTitle" />
+  </wsdl:message>
+  <wsdl:message name="QueryUsersByTitleResponse">
+    <wsdl:part name="parameters" element="tns:QueryUsersByTitleResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserPKListInfoRequest">
+    <wsdl:part name="parameters" element="tns:GetUserPKListInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetUserPKListInfoResponse">
+    <wsdl:part name="parameters" element="tns:GetUserPKListInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserPKListRequest">
+    <wsdl:part name="parameters" element="tns:GetUserPKList" />
+  </wsdl:message>
+  <wsdl:message name="GetUserPKListResponse">
+    <wsdl:part name="parameters" element="tns:GetUserPKListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserGBListRequest">
+    <wsdl:part name="parameters" element="tns:GetUserGBList" />
+  </wsdl:message>
+  <wsdl:message name="GetUserGBListResponse">
+    <wsdl:part name="parameters" element="tns:GetUserGBListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNewUserPKListRequest">
+    <wsdl:part name="parameters" element="tns:GetNewUserPKList" />
+  </wsdl:message>
+  <wsdl:message name="GetNewUserPKListResponse">
+    <wsdl:part name="parameters" element="tns:GetNewUserPKListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNewUserGBListRequest">
+    <wsdl:part name="parameters" element="tns:GetNewUserGBList" />
+  </wsdl:message>
+  <wsdl:message name="GetNewUserGBListResponse">
+    <wsdl:part name="parameters" element="tns:GetNewUserGBListResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryEnvelopeRequest">
+    <wsdl:part name="parameters" element="tns:QueryEnvelope" />
+  </wsdl:message>
+  <wsdl:message name="QueryEnvelopeResponse">
+    <wsdl:part name="parameters" element="tns:QueryEnvelopeResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetTakenFromEntegratorRequest">
+    <wsdl:part name="parameters" element="tns:SetTakenFromEntegrator" />
+  </wsdl:message>
+  <wsdl:message name="SetTakenFromEntegratorResponse">
+    <wsdl:part name="parameters" element="tns:SetTakenFromEntegratorResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryOutboxResponseDocumentRequest">
+    <wsdl:part name="parameters" element="tns:QueryOutboxResponseDocument" />
+  </wsdl:message>
+  <wsdl:message name="QueryOutboxResponseDocumentResponse">
+    <wsdl:part name="parameters" element="tns:QueryOutboxResponseDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPKListRequest">
+    <wsdl:part name="parameters" element="tns:GetPKList" />
+  </wsdl:message>
+  <wsdl:message name="GetPKListResponse">
+    <wsdl:part name="parameters" element="tns:GetPKListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInboxAttachmentRequest">
+    <wsdl:part name="parameters" element="tns:GetInboxAttachment" />
+  </wsdl:message>
+  <wsdl:message name="GetInboxAttachmentResponse">
+    <wsdl:part name="parameters" element="tns:GetInboxAttachmentResponse" />
+  </wsdl:message>
+  <wsdl:portType name="QueryDocumentWS">
+    <wsdl:operation name="QueryArchivedInboxDocument">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryArchivedInboxDocumentRequest" name="QueryArchivedInboxDocumentRequest" message="tns:QueryArchivedInboxDocumentRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryArchivedInboxDocumentResponse" name="QueryArchivedInboxDocumentResponse" message="tns:QueryArchivedInboxDocumentResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryInboxDocumentsWithGUIDList">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryInboxDocumentsWithGUIDListRequest" name="QueryInboxDocumentsWithGUIDListRequest" message="tns:QueryInboxDocumentsWithGUIDListRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryInboxDocumentsWithGUIDListResponse" name="QueryInboxDocumentsWithGUIDListResponse" message="tns:QueryInboxDocumentsWithGUIDListResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryInboxDocumentsWithReceivedDate">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryInboxDocumentsWithReceivedDateRequest" name="QueryInboxDocumentsWithReceivedDateRequest" message="tns:QueryInboxDocumentsWithReceivedDateRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryInboxDocumentsWithReceivedDateResponse" name="QueryInboxDocumentsWithReceivedDateResponse" message="tns:QueryInboxDocumentsWithReceivedDateResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryInboxDocument">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryInboxDocumentRequest" name="QueryInboxDocumentRequest" message="tns:QueryInboxDocumentRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryInboxDocumentResponse" name="QueryInboxDocumentResponse" message="tns:QueryInboxDocumentResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryInboxDocumentsWithReceivedDateWithSearchParams">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryInboxDocumentsWithReceivedDateWithSearchParamsRequest" name="QueryInboxDocumentsWithReceivedDateWithSearchParamsRequest" message="tns:QueryInboxDocumentsWithReceivedDateWithSearchParamsRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryInboxDocumentsWithReceivedDateWithSearchParamsResponse" name="QueryInboxDocumentsWithReceivedDateWithSearchParamsResponse" message="tns:QueryInboxDocumentsWithReceivedDateWithSearchParamsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryInboxDocumentsWithDocumentDate">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryInboxDocumentsWithDocumentDateRequest" name="QueryInboxDocumentsWithDocumentDateRequest" message="tns:QueryInboxDocumentsWithDocumentDateRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryInboxDocumentsWithDocumentDateResponse" name="QueryInboxDocumentsWithDocumentDateResponse" message="tns:QueryInboxDocumentsWithDocumentDateResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryInboxDocumentsWithDocumentDateAndSearchParams">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryInboxDocumentsWithDocumentDateAndSearchParamsRequest" name="QueryInboxDocumentsWithDocumentDateAndSearchParamsRequest" message="tns:QueryInboxDocumentsWithDocumentDateAndSearchParamsRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryInboxDocumentsWithDocumentDateAndSearchParamsResponse" name="QueryInboxDocumentsWithDocumentDateAndSearchParamsResponse" message="tns:QueryInboxDocumentsWithDocumentDateAndSearchParamsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryInboxArchivedDocumentsWithDocumentDate">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryInboxArchivedDocumentsWithDocumentDateRequest" name="QueryInboxArchivedDocumentsWithDocumentDateRequest" message="tns:QueryInboxArchivedDocumentsWithDocumentDateRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryInboxArchivedDocumentsWithDocumentDateResponse" name="QueryInboxArchivedDocumentsWithDocumentDateResponse" message="tns:QueryInboxArchivedDocumentsWithDocumentDateResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryOutboxDocument">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryOutboxDocumentRequest" name="QueryOutboxDocumentRequest" message="tns:QueryOutboxDocumentRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryOutboxDocumentResponse" name="QueryOutboxDocumentResponse" message="tns:QueryOutboxDocumentResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryArchivedOutboxDocument">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryArchivedOutboxDocumentRequest" name="QueryArchivedOutboxDocumentRequest" message="tns:QueryArchivedOutboxDocumentRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryArchivedOutboxDocumentResponse" name="QueryArchivedOutboxDocumentResponse" message="tns:QueryArchivedOutboxDocumentResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryOutboxDocumentWithLocalId">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryOutboxDocumentWithLocalIdRequest" name="QueryOutboxDocumentWithLocalIdRequest" message="tns:QueryOutboxDocumentWithLocalIdRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryOutboxDocumentWithLocalIdResponse" name="QueryOutboxDocumentWithLocalIdResponse" message="tns:QueryOutboxDocumentWithLocalIdResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryOutboxDocumentsWithReceivedDate">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryOutboxDocumentsWithReceivedDateRequest" name="QueryOutboxDocumentsWithReceivedDateRequest" message="tns:QueryOutboxDocumentsWithReceivedDateRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryOutboxDocumentsWithReceivedDateResponse" name="QueryOutboxDocumentsWithReceivedDateResponse" message="tns:QueryOutboxDocumentsWithReceivedDateResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryOutboxDocumentsWithReceivedDateWithSearchParams">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryOutboxDocumentsWithReceivedDateWithSearchParamsRequest" name="QueryOutboxDocumentsWithReceivedDateWithSearchParamsRequest" message="tns:QueryOutboxDocumentsWithReceivedDateWithSearchParamsRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryOutboxDocumentsWithReceivedDateWithSearchParamsResponse" name="QueryOutboxDocumentsWithReceivedDateWithSearchParamsResponse" message="tns:QueryOutboxDocumentsWithReceivedDateWithSearchParamsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryOutboxDocumentsWithDocumentDate">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryOutboxDocumentsWithDocumentDateRequest" name="QueryOutboxDocumentsWithDocumentDateRequest" message="tns:QueryOutboxDocumentsWithDocumentDateRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryOutboxDocumentsWithDocumentDateResponse" name="QueryOutboxDocumentsWithDocumentDateResponse" message="tns:QueryOutboxDocumentsWithDocumentDateResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryOutboxDocumentsWithDocumentDateAndSearchParams">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryOutboxDocumentsWithDocumentDateAndSearchParamsRequest" name="QueryOutboxDocumentsWithDocumentDateAndSearchParamsRequest" message="tns:QueryOutboxDocumentsWithDocumentDateAndSearchParamsRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryOutboxDocumentsWithDocumentDateAndSearchParamsResponse" name="QueryOutboxDocumentsWithDocumentDateAndSearchParamsResponse" message="tns:QueryOutboxDocumentsWithDocumentDateAndSearchParamsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryOutboxArchivedDocumentsWithDocumentDate">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryOutboxArchivedDocumentsWithDocumentDateRequest" name="QueryOutboxArchivedDocumentsWithDocumentDateRequest" message="tns:QueryOutboxArchivedDocumentsWithDocumentDateRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryOutboxArchivedDocumentsWithDocumentDateResponse" name="QueryOutboxArchivedDocumentsWithDocumentDateResponse" message="tns:QueryOutboxArchivedDocumentsWithDocumentDateResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryOutboxDocumentsWithWithGUIDList">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryOutboxDocumentsWithWithGUIDListRequest" name="QueryOutboxDocumentsWithWithGUIDListRequest" message="tns:QueryOutboxDocumentsWithWithGUIDListRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryOutboxDocumentsWithWithGUIDListResponse" name="QueryOutboxDocumentsWithWithGUIDListResponse" message="tns:QueryOutboxDocumentsWithWithGUIDListResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryAppResponseOfOutboxDocument">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryAppResponseOfOutboxDocumentRequest" name="QueryAppResponseOfOutboxDocumentRequest" message="tns:QueryAppResponseOfOutboxDocumentRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryAppResponseOfOutboxDocumentResponse" name="QueryAppResponseOfOutboxDocumentResponse" message="tns:QueryAppResponseOfOutboxDocumentResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryAppResponseOfInboxDocument">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryAppResponseOfInboxDocumentRequest" name="QueryAppResponseOfInboxDocumentRequest" message="tns:QueryAppResponseOfInboxDocumentRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryAppResponseOfInboxDocumentResponse" name="QueryAppResponseOfInboxDocumentResponse" message="tns:QueryAppResponseOfInboxDocumentResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLastInvoiceIdAndDate">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/GetLastInvoiceIdAndDateRequest" name="GetLastInvoiceIdAndDateRequest" message="tns:GetLastInvoiceIdAndDateRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/GetLastInvoiceIdAndDateResponse" name="GetLastInvoiceIdAndDateResponse" message="tns:GetLastInvoiceIdAndDateResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryUsers">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryUsersRequest" name="QueryUsersRequest" message="tns:QueryUsersRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryUsersResponse" name="QueryUsersResponse" message="tns:QueryUsersResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryUsersByTitle">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryUsersByTitleRequest" name="QueryUsersByTitleRequest" message="tns:QueryUsersByTitleRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryUsersByTitleResponse" name="QueryUsersByTitleResponse" message="tns:QueryUsersByTitleResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserPKListInfo">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/GetUserPKListInfoRequest" name="GetUserPKListInfoRequest" message="tns:GetUserPKListInfoRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/GetUserPKListInfoResponse" name="GetUserPKListInfoResponse" message="tns:GetUserPKListInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserPKList">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/GetUserPKListRequest" name="GetUserPKListRequest" message="tns:GetUserPKListRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/GetUserPKListResponse" name="GetUserPKListResponse" message="tns:GetUserPKListResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserGBList">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/GetUserGBListRequest" name="GetUserGBListRequest" message="tns:GetUserGBListRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/GetUserGBListResponse" name="GetUserGBListResponse" message="tns:GetUserGBListResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewUserPKList">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/GetNewUserPKListRequest" name="GetNewUserPKListRequest" message="tns:GetNewUserPKListRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/GetNewUserPKListResponse" name="GetNewUserPKListResponse" message="tns:GetNewUserPKListResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewUserGBList">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/GetNewUserGBListRequest" name="GetNewUserGBListRequest" message="tns:GetNewUserGBListRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/GetNewUserGBListResponse" name="GetNewUserGBListResponse" message="tns:GetNewUserGBListResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryEnvelope">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryEnvelopeRequest" name="QueryEnvelopeRequest" message="tns:QueryEnvelopeRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryEnvelopeResponse" name="QueryEnvelopeResponse" message="tns:QueryEnvelopeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="SetTakenFromEntegrator">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/SetTakenFromEntegratorRequest" name="SetTakenFromEntegratorRequest" message="tns:SetTakenFromEntegratorRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/SetTakenFromEntegratorResponse" name="SetTakenFromEntegratorResponse" message="tns:SetTakenFromEntegratorResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryOutboxResponseDocument">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryOutboxResponseDocumentRequest" name="QueryOutboxResponseDocumentRequest" message="tns:QueryOutboxResponseDocumentRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryOutboxResponseDocumentResponse" name="QueryOutboxResponseDocumentResponse" message="tns:QueryOutboxResponseDocumentResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPKList">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/GetPKListRequest" name="GetPKListRequest" message="tns:GetPKListRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/GetPKListResponse" name="GetPKListResponse" message="tns:GetPKListResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInboxAttachment">
+      <wsdl:input wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/GetInboxAttachmentRequest" name="GetInboxAttachmentRequest" message="tns:GetInboxAttachmentRequest" />
+      <wsdl:output wsaw:Action="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/GetInboxAttachmentResponse" name="GetInboxAttachmentResponse" message="tns:GetInboxAttachmentResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CustomBinding_QueryDocumentWS" type="tns:QueryDocumentWS">
+    <wsp:PolicyReference URI="#CustomBinding_QueryDocumentWS_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="QueryArchivedInboxDocument">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryArchivedInboxDocumentRequest" style="document" />
+      <wsdl:input name="QueryArchivedInboxDocumentRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryArchivedInboxDocumentResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryInboxDocumentsWithGUIDList">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryInboxDocumentsWithGUIDListRequest" style="document" />
+      <wsdl:input name="QueryInboxDocumentsWithGUIDListRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryInboxDocumentsWithGUIDListResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryInboxDocumentsWithReceivedDate">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryInboxDocumentsWithReceivedDateRequest" style="document" />
+      <wsdl:input name="QueryInboxDocumentsWithReceivedDateRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryInboxDocumentsWithReceivedDateResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryInboxDocument">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryInboxDocumentRequest" style="document" />
+      <wsdl:input name="QueryInboxDocumentRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryInboxDocumentResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryInboxDocumentsWithReceivedDateWithSearchParams">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryInboxDocumentsWithReceivedDateWithSearchParamsRequest" style="document" />
+      <wsdl:input name="QueryInboxDocumentsWithReceivedDateWithSearchParamsRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryInboxDocumentsWithReceivedDateWithSearchParamsResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryInboxDocumentsWithDocumentDate">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryInboxDocumentsWithDocumentDateRequest" style="document" />
+      <wsdl:input name="QueryInboxDocumentsWithDocumentDateRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryInboxDocumentsWithDocumentDateResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryInboxDocumentsWithDocumentDateAndSearchParams">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryInboxDocumentsWithDocumentDateAndSearchParamsRequest" style="document" />
+      <wsdl:input name="QueryInboxDocumentsWithDocumentDateAndSearchParamsRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryInboxDocumentsWithDocumentDateAndSearchParamsResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryInboxArchivedDocumentsWithDocumentDate">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryInboxArchivedDocumentsWithDocumentDateRequest" style="document" />
+      <wsdl:input name="QueryInboxArchivedDocumentsWithDocumentDateRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryInboxArchivedDocumentsWithDocumentDateResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryOutboxDocument">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryOutboxDocumentRequest" style="document" />
+      <wsdl:input name="QueryOutboxDocumentRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryOutboxDocumentResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryArchivedOutboxDocument">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryArchivedOutboxDocumentRequest" style="document" />
+      <wsdl:input name="QueryArchivedOutboxDocumentRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryArchivedOutboxDocumentResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryOutboxDocumentWithLocalId">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryOutboxDocumentWithLocalIdRequest" style="document" />
+      <wsdl:input name="QueryOutboxDocumentWithLocalIdRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryOutboxDocumentWithLocalIdResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryOutboxDocumentsWithReceivedDate">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryOutboxDocumentsWithReceivedDateRequest" style="document" />
+      <wsdl:input name="QueryOutboxDocumentsWithReceivedDateRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryOutboxDocumentsWithReceivedDateResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryOutboxDocumentsWithReceivedDateWithSearchParams">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryOutboxDocumentsWithReceivedDateWithSearchParamsRequest" style="document" />
+      <wsdl:input name="QueryOutboxDocumentsWithReceivedDateWithSearchParamsRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryOutboxDocumentsWithReceivedDateWithSearchParamsResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryOutboxDocumentsWithDocumentDate">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryOutboxDocumentsWithDocumentDateRequest" style="document" />
+      <wsdl:input name="QueryOutboxDocumentsWithDocumentDateRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryOutboxDocumentsWithDocumentDateResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryOutboxDocumentsWithDocumentDateAndSearchParams">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryOutboxDocumentsWithDocumentDateAndSearchParamsRequest" style="document" />
+      <wsdl:input name="QueryOutboxDocumentsWithDocumentDateAndSearchParamsRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryOutboxDocumentsWithDocumentDateAndSearchParamsResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryOutboxArchivedDocumentsWithDocumentDate">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryOutboxArchivedDocumentsWithDocumentDateRequest" style="document" />
+      <wsdl:input name="QueryOutboxArchivedDocumentsWithDocumentDateRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryOutboxArchivedDocumentsWithDocumentDateResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryOutboxDocumentsWithWithGUIDList">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryOutboxDocumentsWithWithGUIDListRequest" style="document" />
+      <wsdl:input name="QueryOutboxDocumentsWithWithGUIDListRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryOutboxDocumentsWithWithGUIDListResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryAppResponseOfOutboxDocument">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryAppResponseOfOutboxDocumentRequest" style="document" />
+      <wsdl:input name="QueryAppResponseOfOutboxDocumentRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryAppResponseOfOutboxDocumentResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryAppResponseOfInboxDocument">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryAppResponseOfInboxDocumentRequest" style="document" />
+      <wsdl:input name="QueryAppResponseOfInboxDocumentRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryAppResponseOfInboxDocumentResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLastInvoiceIdAndDate">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/GetLastInvoiceIdAndDateRequest" style="document" />
+      <wsdl:input name="GetLastInvoiceIdAndDateRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetLastInvoiceIdAndDateResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUsers">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryUsersRequest" style="document" />
+      <wsdl:input name="QueryUsersRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryUsersResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUsersByTitle">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryUsersByTitleRequest" style="document" />
+      <wsdl:input name="QueryUsersByTitleRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryUsersByTitleResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserPKListInfo">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/GetUserPKListInfoRequest" style="document" />
+      <wsdl:input name="GetUserPKListInfoRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetUserPKListInfoResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserPKList">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/GetUserPKListRequest" style="document" />
+      <wsdl:input name="GetUserPKListRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetUserPKListResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserGBList">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/GetUserGBListRequest" style="document" />
+      <wsdl:input name="GetUserGBListRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetUserGBListResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewUserPKList">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/GetNewUserPKListRequest" style="document" />
+      <wsdl:input name="GetNewUserPKListRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetNewUserPKListResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewUserGBList">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/GetNewUserGBListRequest" style="document" />
+      <wsdl:input name="GetNewUserGBListRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetNewUserGBListResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryEnvelope">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryEnvelopeRequest" style="document" />
+      <wsdl:input name="QueryEnvelopeRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryEnvelopeResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetTakenFromEntegrator">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/SetTakenFromEntegratorRequest" style="document" />
+      <wsdl:input name="SetTakenFromEntegratorRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SetTakenFromEntegratorResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryOutboxResponseDocument">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/QueryOutboxResponseDocumentRequest" style="document" />
+      <wsdl:input name="QueryOutboxResponseDocumentRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryOutboxResponseDocumentResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPKList">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/GetPKListRequest" style="document" />
+      <wsdl:input name="GetPKListRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetPKListResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInboxAttachment">
+      <soap12:operation soapAction="http://queryinvoiceservice.entegrator.com/QueryDocumentWS/GetInboxAttachmentRequest" style="document" />
+      <wsdl:input name="GetInboxAttachmentRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetInboxAttachmentResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="QueryDocumentWSService">
+    <wsdl:port name="CustomBinding_QueryDocumentWS" binding="tns:CustomBinding_QueryDocumentWS">
+      <soap12:address location="https://univerainvoice.ardsistem.com.tr/QueryDocumentWSService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
